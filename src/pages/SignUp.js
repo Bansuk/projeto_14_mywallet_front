@@ -27,7 +27,9 @@ const SignUp = () => {
       return;
     }
 
-    signUpUser(body).then(history.push('/')).catch(history.push('/erro'));
+    signUpUser(body)
+      .then(res => history.push('/'))
+      .catch(err => history.push('/erro'));
   };
 
   return (

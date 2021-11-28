@@ -12,8 +12,6 @@ function validateUserInput(body, page) {
   const errorMessage =
     isInputInvalid && JSON.stringify(isInputInvalid.details[0].message);
 
-  console.log(errorMessage);
-
   if (errorMessage?.includes('name')) {
     return {
       errorId: 1,

@@ -2,13 +2,16 @@ import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { Container, Form, Button } from '../styles/styleAuth';
 import { signInUser } from '../Services/api.services.js';
+import validateUserInput from '../validations/authValidation';
 
 const SignIn = ({ setUser }) => {
+  let userPersistence = {};
   const history = useHistory();
+  const [errorHandler, setErrorHandler] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signIn = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     const body = {
@@ -16,20 +19,26 @@ const SignIn = ({ setUser }) => {
       password,
     };
 
+    if (validateUserInput(body, 'sign-in')) {
+      setErrorHandler(validateUserInput(body, 'sign-in'));
+      return;
+    }
+
     signInUser(body)
       .then(res => {
-        setUser(res.data);
+        const token = res.data.token;
+        setUser(token);
+        userPersistence = JSON.stringify(token);
+        localStorage.setItem('user', userPersistence);
         history.push('/balanco');
       })
-      .catch(err => {
-        alert('Erro ao logar!');
-      });
+      .catch(err => history.push('/erro'));
   };
 
   return (
     <Container>
       <h1>MyWallet</h1>
-      <Form onSubmit={signIn}>
+      <Form onSubmit={handleSubmit}>
         <input
           type='email'
           placeholder='E-mail'
@@ -37,6 +46,7 @@ const SignIn = ({ setUser }) => {
           onChange={e => setEmail(e.target.value)}
           required
         />
+        {errorHandler.errorId === 2 && <span>{errorHandler.errorMessage}</span>}
         <input
           type='password'
           placeholder='Senha'
@@ -44,6 +54,7 @@ const SignIn = ({ setUser }) => {
           onChange={e => setPassword(e.target.value)}
           required
         />
+        {errorHandler.errorId === 3 && <span>{errorHandler.errorMessage}</span>}
         <Button>Entrar</Button>
       </Form>
       <Link to={'/cadastro'}>Primeira vez? Cadastre-se!</Link>
