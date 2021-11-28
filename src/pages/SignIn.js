@@ -5,6 +5,7 @@ import { signInUser } from '../Services/api.services.js';
 import validateUserInput from '../validations/authValidation';
 
 const SignIn = ({ setUser }) => {
+  let userPersistence = {};
   const history = useHistory();
   const [errorHandler, setErrorHandler] = useState({});
   const [email, setEmail] = useState('');
@@ -25,7 +26,10 @@ const SignIn = ({ setUser }) => {
 
     signInUser(body)
       .then(res => {
-        setUser(res.data);
+        const token = res.data.token;
+        setUser(token);
+        userPersistence = JSON.stringify(token);
+        localStorage.setItem('user', userPersistence);
         history.push('/balanco');
       })
       .catch(err => history.push('/erro'));

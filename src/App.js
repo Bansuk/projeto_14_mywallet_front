@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GlobalStyle from './styles/styleGlobal';
 import UserContext from './Contexts/UserContext';
 import SignIn from './pages/SignIn';
@@ -10,6 +10,14 @@ import error from './pages/Error';
 
 function App() {
   const [user, setUser] = useState({});
+
+  useEffect(() => {
+    let loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      loggedInUser = JSON.parse(loggedInUser);
+      setUser(loggedInUser);
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={user}>
