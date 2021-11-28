@@ -15,16 +15,11 @@ const Transaction = ({ date, description, value }) => {
         </span>
         <span className={'transaction__description'}>{description}</span>
       </div>
-      <div
-        className={
-          //O props do styled component estava dando erro
-          isValuePositive
-            ? 'transaction__value--pos'
-            : 'transaction__value--neg'
-        }
+      <TransactionValue
+        transactionColor={isValuePositive ? '#03ac00' : '#c70000'}
       >
         {newValue}
-      </div>
+      </TransactionValue>
     </TransactionStyle>
   );
 };
@@ -34,6 +29,7 @@ export default Transaction;
 const TransactionStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 
   & span {
     font-size: 16px;
@@ -47,12 +43,8 @@ const TransactionStyle = styled.div`
     color: #000;
     margin-left: 10px;
   }
+`;
 
-  & .transaction__value--neg {
-    color: #c70000;
-  }
-
-  & .transaction__value--pos {
-    color: #03ac00;
-  }
+const TransactionValue = styled.div`
+  color: ${props => props.transactionColor};
 `;

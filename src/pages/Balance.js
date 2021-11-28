@@ -15,7 +15,7 @@ import {
   Transactions,
   Total,
   BalanceValue,
-} from './BStyles';
+} from '../styles/styleBalance';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
 import Transaction from '../Components/Transaction';
@@ -25,6 +25,7 @@ const Balance = ({ setUser }) => {
   //const { name, token } = useContext(UserContext);
   const [transactions, setTransactions] = useState([
     { transaction_id: 1, date: '11/02/2021', description: 'a', value: '12' },
+    { transaction_id: 2, date: '11/02/2021', description: 'a', value: '-12' },
   ]);
   const [balance, setBalance] = useState(0);
   const history = useHistory();
