@@ -1,10 +1,6 @@
-import UserContext from '../Contexts/UserContext';
+import UserContext from '../contexts/UserContext';
 import { useContext, useEffect, useState } from 'react';
-import {
-  getTransactions,
-  signOutUser,
-  getBalance,
-} from '../Services/api.services';
+import { getTransactions, getBalance } from '../Services/api.services';
 import {
   Container,
   Body,
@@ -20,15 +16,17 @@ import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
 import Transaction from '../Components/Transaction';
 import NewTransactionButton from '../Components/NewTransactionButton';
+import * as balanceHelper from '../helpers/balanceHelper';
 
 const Balance = ({ setUser }) => {
-  //const { name, token } = useContext(UserContext);
+  const token = useContext(UserContext);
+  const history = useHistory();
   const [transactions, setTransactions] = useState([
     { transaction_id: 1, date: '11/02/2021', description: 'a', value: '12' },
     { transaction_id: 2, date: '11/02/2021', description: 'a', value: '-12' },
   ]);
   const [balance, setBalance] = useState(0);
-  const history = useHistory();
+
   let isValuePositive = false;
   if (balance >= 0) isValuePositive = true;
 
@@ -45,12 +43,11 @@ const Balance = ({ setUser }) => {
     <Container>
       <Body>
         <Header>
-          <h1>Olá, {'a'}</h1>
+          <h1>Olá, {balanceHelper.getUserName(token)}</h1>
           <RiLogoutBoxRLine
             className={'header__icon'}
             onClick={() => {
-              signOutUser();
-              setUser(null);
+              balanceHelper.signOut({ setUser, token });
               history.push('/login');
             }}
           />
