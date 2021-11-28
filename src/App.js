@@ -5,8 +5,9 @@ import UserContext from './Contexts/UserContext';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Balance from './pages/Balance';
-import NewTransaction from './Components/NewTransaction';
-import error from './pages/Error';
+import NewTransaction from './pages/NewTransaction';
+import Error from './pages/Error';
+import ProtectedRoute from './helpers/ProtectedRoute';
 
 function App() {
   const [user, setUser] = useState({});
@@ -24,15 +25,15 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Switch>
-          <Route path='/' exact>
+          <Route path='/login' exact>
             <SignIn setUser={setUser} />
           </Route>
           <Route path='/cadastro' exact component={SignUp} />
-          <Route path='/balanco' exact>
+          <Route path='/' exact>
             <Balance setUser={setUser} />
           </Route>
-          <Route path='/transacao' exact component={NewTransaction} />
-          <Route path='/erro' exact component={error} />
+          <ProtectedRoute path='/transacao' exact component={NewTransaction} />
+          <Route path='/erro' exact component={Error} />
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>

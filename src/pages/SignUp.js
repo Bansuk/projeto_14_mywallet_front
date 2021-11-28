@@ -28,7 +28,7 @@ const SignUp = () => {
     }
 
     signUpUser(body)
-      .then(res => history.push('/'))
+      .then(res => history.push('/login'))
       .catch(err => history.push('/erro'));
   };
 
@@ -70,7 +70,7 @@ const SignUp = () => {
         {errorHandler.errorId === 4 && <span>{errorHandler.errorMessage}</span>}
         <Button>Cadastrar</Button>
       </Form>
-      <Link to={'/'}>Já tem uma conta? Entre agora!</Link>
+      <Link to={'/login'}>Já tem uma conta? Entre agora!</Link>
     </Container>
   );
 };

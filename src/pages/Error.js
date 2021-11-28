@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import errorImage from '../assets/error_image.png';
 
-const error = () => {
+const Error = () => {
   return (
     <Container>
       <img src={errorImage} alt='sad money cartoon' />
@@ -13,7 +13,7 @@ const error = () => {
   );
 };
 
-export default error;
+export default Error;
 
 const Container = styled.div`
   align-items: center;

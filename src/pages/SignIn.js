@@ -30,7 +30,7 @@ const SignIn = ({ setUser }) => {
         setUser(token);
         userPersistence = JSON.stringify(token);
         localStorage.setItem('user', userPersistence);
-        history.push('/balanco');
+        history.push('/');
       })
       .catch(err => history.push('/erro'));
   };
