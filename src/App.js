@@ -29,9 +29,11 @@ function App() {
             <SignIn setUser={setUser} />
           </Route>
           <Route path='/cadastro' exact component={SignUp} />
-          <Route path='/' exact>
-            <Balance setUser={setUser} />
-          </Route>
+          <ProtectedRoute
+            path='/'
+            exact
+            render={() => <Balance setUser={setUser} />}
+          ></ProtectedRoute>
           <ProtectedRoute path='/transacao' exact component={NewTransaction} />
           <Route path='/erro' exact component={Error} />
         </Switch>
