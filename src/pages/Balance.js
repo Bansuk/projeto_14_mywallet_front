@@ -18,7 +18,7 @@ import {
 import { FaSignOutAlt } from 'react-icons/fa';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
-import Transaction from './Transaction';
+import Transaction from '../Components/Transaction';
 
 const Balance = ({ setUser }) => {
   //const { name, token } = useContext(UserContext);

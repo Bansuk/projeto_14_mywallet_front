@@ -5,7 +5,7 @@ import UserContext from './Contexts/UserContext';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Balance from './pages/Balance';
-import NewTransaction from './Components/NewTransaction';
+import NewTransaction from './pages/NewTransaction';
 import error from './pages/Error';
 
 function App() {
