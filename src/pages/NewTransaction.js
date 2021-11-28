@@ -12,7 +12,7 @@ const NewTransaction = props => {
   const [errorHandler, setErrorHandler] = useState({});
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  const { type } = props.location.state;
+  const { type } = props.location.state || '';
   let parsedValue;
 
   const postNewTransaction = e => {
