@@ -9,24 +9,22 @@ import validateTransactionInput from '../validations/transactionValidation';
 const NewTransaction = props => {
   const { token } = useContext(UserContext);
   const history = useHistory();
-  //if (!token) history.push('/');
-
   const [errorHandler, setErrorHandler] = useState({});
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  let newValue;
-  const { type } = props.location.state || 'saída';
+  const { type } = props.location.state;
+  let parsedValue;
 
   const postNewTransaction = e => {
     e.preventDefault();
 
     type === 'saída'
-      ? (newValue = parseInt(value) * -1)
-      : (newValue = parseInt(value));
+      ? (parsedValue = parseInt(value) * -1)
+      : (parsedValue = parseInt(value));
 
     const body = {
       description,
-      value: newValue,
+      value: parsedValue,
     };
 
     if (validateTransactionInput(body)) {
