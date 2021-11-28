@@ -32,7 +32,7 @@ function App() {
           <ProtectedRoute
             path='/'
             exact
-            render={() => <Balance setUser={setUser} />}
+            component={() => <Balance setUser={setUser} />}
           ></ProtectedRoute>
           <ProtectedRoute path='/transacao' exact component={NewTransaction} />
           <Route path='/erro' exact component={Error} />

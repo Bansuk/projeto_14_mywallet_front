@@ -26,7 +26,7 @@ const SignIn = ({ setUser }) => {
 
     signInUser(body)
       .then(res => {
-        const token = res.data.token;
+        const token = res.data;
         setUser(token);
         userPersistence = JSON.stringify(token);
         localStorage.setItem('user', userPersistence);

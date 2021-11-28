@@ -3,8 +3,8 @@ import UserContext from '../Contexts/UserContext';
 import { useContext } from 'react';
 
 const ProtectedRoute = ({ component: Component, ...restOfProps }) => {
-  const { token } = useContext(UserContext);
-  console.log(token);
+  const token = useContext(UserContext);
+
   return (
     <Route
       {...restOfProps}
