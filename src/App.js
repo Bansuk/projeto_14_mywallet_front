@@ -6,6 +6,7 @@ import SignIn from './pages/signIn';
 import SignUp from './pages/SignUp';
 import Balance from './pages/Balance';
 import NewTransaction from './Components/NewTransaction';
+import error from './pages/Error';
 
 function App() {
   const [user, setUser] = useState({});
@@ -23,6 +24,7 @@ function App() {
             <Balance setUser={setUser} />
           </Route>
           <Route path='/transacao' exact component={NewTransaction} />
+          <Route path='/erro' exact component={error} />
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>

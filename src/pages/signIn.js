@@ -1,6 +1,6 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { Container, Form, Button } from './Styles';
+import { Container, Form, Button } from '../styles/styleAuth';
 import { signInUser } from '../Services/api.services.js';
 
 const SignIn = ({ setUser }) => {
