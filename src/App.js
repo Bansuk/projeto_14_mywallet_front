@@ -2,7 +2,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 import GlobalStyle from './styles/styleGlobal';
 import UserContext from './Contexts/UserContext';
-import SignIn from './pages/signIn';
+import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Balance from './pages/Balance';
 import NewTransaction from './Components/NewTransaction';
