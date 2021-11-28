@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { Container, Header } from '../styles/styleNewTransaction';
 import { Form, Button } from '../styles/styleAuth.js';
 import { postTransaction } from '../Services/api.services';
-import UserContext from '../Contexts/UserContext';
+import UserContext from '../contexts/UserContext';
 import validateTransactionInput from '../validations/transactionValidation';
 
 const NewTransaction = props => {

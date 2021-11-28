@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import GlobalStyle from './styles/styleGlobal';
-import UserContext from './Contexts/UserContext';
+import UserContext from './contexts/UserContext';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Balance from './pages/Balance';
@@ -10,7 +10,7 @@ import Error from './pages/Error';
 import ProtectedRoute from './helpers/ProtectedRoute';
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     let loggedInUser = localStorage.getItem('user');
