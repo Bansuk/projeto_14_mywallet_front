@@ -34,7 +34,6 @@ export default Transaction;
 const TransactionStyle = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
 
   & span {
     font-size: 16px;

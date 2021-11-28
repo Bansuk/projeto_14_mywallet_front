@@ -11,18 +11,21 @@ import {
   Header,
   Display,
   Buttons,
-  Button,
+  Statement,
   Transactions,
   Total,
+  BalanceValue,
 } from './BStyles';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
 import Transaction from '../Components/Transaction';
+import NewTransactionButton from '../Components/NewTransactionButton';
 
 const Balance = ({ setUser }) => {
   //const { name, token } = useContext(UserContext);
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState([
+    { transaction_id: 1, date: '11/02/2021', description: 'a', value: '12' },
+  ]);
   const [balance, setBalance] = useState(0);
   const history = useHistory();
   let isValuePositive = false;
@@ -42,42 +45,39 @@ const Balance = ({ setUser }) => {
       <Body>
         <Header>
           <h1>Olá, {'a'}</h1>
-          <FaSignOutAlt
+          <RiLogoutBoxRLine
+            className={'header__icon'}
             onClick={() => {
               signOutUser();
               setUser(null);
-              history.push('/');
+              history.push('/login');
             }}
           />
         </Header>
         <Display>
           {transactions ? (
-            <Transactions>
-              {transactions.map(transaction => (
-                <Transaction
-                  key={transaction.transaction_id}
-                  date={transaction.date}
-                  description={transaction.description}
-                  value={transaction.value}
-                />
-              ))}
+            <Statement>
+              <Transactions>
+                {transactions.map(transaction => (
+                  <Transaction
+                    key={transaction.transaction_id}
+                    date={transaction.date}
+                    description={transaction.description}
+                    value={transaction.value}
+                  />
+                ))}
+              </Transactions>
               <Total>
                 <div className={'balance__total'}>SALDO</div>
-                <div
-                  className={
-                    isValuePositive
-                      ? 'balance__value--pos'
-                      : 'balance__value--neg'
-                  }
+                <BalanceValue
+                  balanceColor={isValuePositive ? '#03ac00' : '#c70000'}
                 >
                   {balance.toFixed(2)}
-                </div>
+                </BalanceValue>
               </Total>
-            </Transactions>
+            </Statement>
           ) : (
-            <span className={'transaction__message'}>
-              Não há registros de entrada ou saída
-            </span>
+            <span>Não há registros de entrada ou saída</span>
           )}
         </Display>
         <Buttons>
@@ -87,13 +87,7 @@ const Balance = ({ setUser }) => {
               state: { type: 'entrada' },
             }}
           >
-            <Button>
-              <AiOutlinePlusCircle className={'button__icon'} />
-              <span>
-                Nova <br />
-                entrada
-              </span>
-            </Button>
+            <NewTransactionButton type='entrada' />
           </Link>
           <Link
             to={{
@@ -101,13 +95,7 @@ const Balance = ({ setUser }) => {
               state: { type: 'saída' },
             }}
           >
-            <Button>
-              <AiOutlineMinusCircle className={'button__icon'} />
-              <span>
-                Nova <br />
-                saída
-              </span>
-            </Button>
+            <NewTransactionButton type='saída' />
           </Link>
         </Buttons>
       </Body>
