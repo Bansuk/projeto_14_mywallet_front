@@ -7,12 +7,13 @@ import UserContext from '../contexts/UserContext';
 import validateTransactionInput from '../validations/transactionValidation';
 
 const NewTransaction = props => {
-  const { token } = useContext(UserContext);
   const history = useHistory();
+  const token = useContext(UserContext);
+  const { type } = props.location.state;
   const [errorHandler, setErrorHandler] = useState({});
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  const { type } = props.location.state;
+
   let parsedValue;
 
   const postNewTransaction = e => {
@@ -34,7 +35,7 @@ const NewTransaction = props => {
 
     postTransaction(body, token)
       .then(res => {
-        history.push('/balanco');
+        history.push('/');
       })
       .catch(err => history.push('/erro'));
   };
