@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://mywalletv2-back.herokuapp.com/ ';
+const URL = 'https://mywalletv2-back.herokuapp.com/';
 
 const config = token => {
   return {
