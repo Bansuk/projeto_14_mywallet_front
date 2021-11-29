@@ -1,7 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { Container, Form, Button } from '../styles/styleAuth';
-import { signUpUser } from '../Services/api.services';
+import { signUpUser } from '../services/api.services';
 import validateUserInput from '../validations/authValidation';
 
 const SignUp = () => {

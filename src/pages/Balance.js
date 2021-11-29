@@ -1,6 +1,6 @@
 import UserContext from '../contexts/UserContext';
 import { useContext, useEffect, useState } from 'react';
-import { getTransactions, getBalance } from '../Services/api.services';
+import { getTransactions, getBalance } from '../services/api.services';
 import {
   Container,
   Body,
@@ -14,30 +14,24 @@ import {
 } from '../styles/styleBalance';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
-import Transaction from '../Components/Transaction';
-import NewTransactionButton from '../Components/NewTransactionButton';
+import Transaction from '../components/Transaction';
+import NewTransactionButton from '../components/NewTransactionButton';
 import * as balanceHelper from '../helpers/balanceHelper';
 
 const Balance = ({ setUser }) => {
   const token = useContext(UserContext);
   const history = useHistory();
-  const [transactions, setTransactions] = useState([
-    { transaction_id: 1, date: '11/02/2021', description: 'a', value: '12' },
-    { transaction_id: 2, date: '11/02/2021', description: 'a', value: '-12' },
-  ]);
+  const [transactions, setTransactions] = useState([]);
   const [balance, setBalance] = useState(0);
 
-  let isValuePositive = false;
-  if (balance >= 0) isValuePositive = true;
-
-  // useEffect(() => {
-  //     getTransactions(token)
-  //         .then(res => setTransactions(res.data))
-  //         .catch(err => alert("Erro ao obter as transações!"));
-  //     getBalance(token)
-  //         .then(res => setBalance(res.data))
-  //         .catch(err => alert("Erro ao obter o saldo!"));
-  // });
+  useEffect(() => {
+    getTransactions(token)
+      .then(res => setTransactions(res.data))
+      .catch(err => alert('Erro ao obter as transações!'));
+    getBalance(token)
+      .then(res => setBalance(res.data))
+      .catch(err => alert('Erro ao obter o saldo!'));
+  });
 
   return (
     <Container>
@@ -53,12 +47,12 @@ const Balance = ({ setUser }) => {
           />
         </Header>
         <Display>
-          {transactions ? (
+          {transactions.length ? (
             <Statement>
               <Transactions>
                 {transactions.map(transaction => (
                   <Transaction
-                    key={transaction.transaction_id}
+                    key={transaction.id}
                     date={transaction.date}
                     description={transaction.description}
                     value={transaction.value}
@@ -68,7 +62,9 @@ const Balance = ({ setUser }) => {
               <Total>
                 <div className={'balance__total'}>SALDO</div>
                 <BalanceValue
-                  balanceColor={isValuePositive ? '#03ac00' : '#c70000'}
+                  balanceColor={
+                    balanceHelper.isValuePositive ? '#03ac00' : '#c70000'
+                  }
                 >
                   {balance.toFixed(2)}
                 </BalanceValue>
