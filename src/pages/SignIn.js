@@ -1,7 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { Container, Form, Button } from '../styles/styleAuth';
-import { signInUser } from '../Services/api.services.js';
+import { signInUser } from '../services/api.services.js';
 import validateUserInput from '../validations/authValidation';
 
 const SignIn = ({ setUser }) => {

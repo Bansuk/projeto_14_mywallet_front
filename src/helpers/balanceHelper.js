@@ -1,4 +1,4 @@
-import { signOutUser } from '../Services/api.services';
+import { signOutUser } from '../services/api.services';
 import decodeToken from './decodeToken';
 
 const signOut = ({ setUser, token }) => {
@@ -12,4 +12,7 @@ const getUserName = token => {
   return userName;
 };
 
-export { signOut, getUserName };
+const isValuePositive = value => {
+  return (value >= 0)
+}
+export { signOut, getUserName, isValuePositive };

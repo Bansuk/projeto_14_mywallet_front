@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { Container, Header } from '../styles/styleNewTransaction';
 import { Form, Button } from '../styles/styleAuth.js';
-import { postTransaction } from '../Services/api.services';
+import { postTransaction } from '../services/api.services';
 import UserContext from '../contexts/UserContext';
 import validateTransactionInput from '../validations/transactionValidation';
 
@@ -20,8 +20,8 @@ const NewTransaction = props => {
     e.preventDefault();
 
     type === 'saída'
-      ? (parsedValue = parseInt(value) * -1)
-      : (parsedValue = parseInt(value));
+      ? (parsedValue = parseFloat(value) * -1)
+      : (parsedValue = parseFloat(value));
 
     const body = {
       description,
